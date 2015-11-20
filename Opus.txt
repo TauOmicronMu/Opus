@@ -7,7 +7,7 @@ Boolean Operators (same for bitwise)
 ~  = not
 &  = and
 || = or
-|  = xor 
+xor  = xor 
 == = equality
 =  = identity
 
