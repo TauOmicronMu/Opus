@@ -30,6 +30,9 @@ Variable Declaration
 --------------------
 let <type> <identifier> = <value>
 
+//non-instantiated
+let <type> <identifier>;
+
 Function Definition
 -------------------
 let <return type> <function name> (params) = {
@@ -85,6 +88,8 @@ class <identifier> extends <class> implements <interface> {
 	}
 }
 
+//NO LONGER USE this. .... USE self. ^-^
+
 Iterables
 ---------
 //ArrayLists are now called "Lists" and will always be used. Arrays will no longer exist.
@@ -137,5 +142,10 @@ Lambda Functions
 ----------------
 
 fun x -> <body>
+
+Printing
+--------
+print <value> //prints without newline
+println <value> //prints with newline
 
 
