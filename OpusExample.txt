@@ -15,7 +15,7 @@ let void main = {
     
     (* Creating an example class *)
     class example {
-        let int n;
+        let int n
        
 	let __init__(int n) = {
 	    self.n = n
