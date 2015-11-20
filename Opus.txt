@@ -35,7 +35,7 @@ let <type> <identifier>;
 
 Function Definition
 -------------------
-let <return type> <function name> (params) = {
+let <return type> <function name> <params> = {
 	<body>
 }
 
