@@ -1,0 +1,318 @@
+<<----------------------------------OPUS---------------------------------->>
+<<-------------------------Opus code on the LHS--------------------------->>
+<<------------------------Java equiv. on the RHS-------------------------->>
+<<------------------------------------------------------------------------>>
+
+>> Statically typed
+>> Type Inference on both Variables & Functions
+>> Strongly typed
+>> Functional & Imperative
+>> Interpreted
+
+<<-----------------Comments----------------->>
+>> Comment
+
+<<Comment over
+multiple lines>>
+
+<<-----------------Print----------------->>
+print("hello world")
+println("hello world")
+
+<<-----------------Booleans----------------->>
+true = true
+false = false
+
+<<-----------------Operators----------------->>
+<<-----Boolean----->
+and = and
+or = or
+xor = xor
+not = not
+=   = equality
+is  = identity
+
+<<-----Mathematical----->>
++   = addition
+-   = subtraction
+*   = multiplication
+/   = division
+//  = integer division
+^   = exponentiation
+%   = modulus
+|n| = absolute value of n
+>   = greater than
+<   = less than
+>=  = greater than or equal to
+<=  = less than or equal to
+
+++x = Prefix incrementation
+--x = Prefix decrementation
+x++ = Postfix incrementation
+x-- = Postfix decrementation
+
+x += y  = (x = x + y)
+x -= y  = (x = x - y)
+x *= y  = (x = x * y)
+x /= y  = (x = x / y)
+x //= y = (x = x // y)
+x ^= y  = (x = x ^ y)
+x %= y  = (x = x % y)
+
+<<-----Bitwise----->>
+¬    = not
+&    = and
+|    = or
+bxor = xor
+
+<<-----Other Operators----->>
+<<Applying a method to a variable : .= >>
+x = x.f() = (x .= f())
+<<-----------------Variable Declaration----------------->>
+<<Non-Instantiated>>
+x~                                                                      (int x;)
+
+<<Instantiated>>
+x 1                                                                 (int x = 1;)
+
+<<-----------------Function definition----------------->>
+<<With no parameters>>
+f {do something}                               (public void f() {do something;})
+
+<<With one parameter>>
+f x {x++}                                    (public int f(int x) {return x++;})
+
+<<With multiple parameters>>
+f x y {x + y}                       (public int f(int x, int y) {return x + y;})
+
+<<NOTE : A variable is seen to be void if there is no tangible value that can
+be returned. For example :
+
+  f x {print("hello " + x)}
+
+  is void, as there is nothing to return - it just prints "hello <x>".
+  This allows you to have void functions that take parameters. >>
+
+<<-----------------Conditionals----------------->>
+<<If, elif, else>>
+if b    {do this}
+elif b' {do this}
+else    {do this}
+
+<<NOTE : These can be split up however, eg. just:
+                if b {do this}
+         Or:
+                if b   {do this}
+                elif c {do this}
+        Or:
+                if b {do this}
+                else {do this}
+
+<<When>>
+<<<NOTE: DURING PATTERN MATCHING ONLY>>
+f xs : match xs with {
+  []                 -> do something,
+  x :: xs when x = 2 -> do something else,
+  x :: xs            -> do something else
+}
+
+<<-----------------Iteration----------------->>
+<<While Loops>>
+while b {do this}                                           (while(b) {do this})
+
+<<Do While Loops>>
+do {something} while b
+
+<<For Loops>>
+<<Only define the end point for i>>
+for i 5 {do this}                         (for(int i = 0; i < 5; i++) {do this})
+
+<<Define both the start and end points for i>>
+for i 2:5 {do this}                       (for(int i = 2; i < 5; i++) {do this})
+
+<<Define a specific method for changing i.
+NOTE : The default is i++>>
+for i(i+2) n {do this}                  (for (int i = 2; i < n; i+=2) {do this})
+
+<<Iterate over an iterable>>
+for i in iterable {do this}              (for(String s : stringArray) {do this})
+
+<<-----------------Pattern Matching----------------->>  (Java doesn't have this :()
+<<Single Match>>
+f xs : match xs with {
+  [] -> do something,
+  x :: xs -> do something else
+}
+
+<<Multiple Matches>>
+f xs ys : match xs, ys with {
+  [], []             -> do something,
+  x :: xs, y :: ys   -> do something else
+}
+
+<<Function 'shortcut'>>
+f : function {
+  []        -> do something,
+  x :: xs   -> do something else
+}
+
+
+
+<<-----------------Iterables----------------->>
+<<-----Lists----->>
+<<NOTE : Lists are mutable in Opus>>
+<<NOTE : Lists are 'dynamic' in size (not technically, but for all intents
+and purposes they will act as if they are)>>
+
+<<Declaration>>
+<<Non-instantiated>>
+x~ []
+
+<<Instantiated>>
+x [1, 2, 3, 4, 5]
+
+<<Element at position n>>
+x[n]
+
+<<Elements up to (but not including) position n>>
+x[:n]
+
+<<Elements from position n upwards>>
+x[n:]
+
+<<Elements between positions m and n-1>>
+x[m:n]
+
+<<Does the list contain element n?>>
+x[n]?
+
+<<Append xs to ys>>
+x @ y
+
+<<Cons>>
+[1,2,3] ==
+1 :: [2,3] ==
+1 :: 2 :: [3] ==
+1 :: 2 :: 3 :: []
+
+<<Populating lists using equations>>
+list x^2 1:11 []
+<< NOTE : This is <identifier> <equation> <number of elements> [] >>
+<<and returns... [1, 4, 9, 16, ...100]>>
+
+
+<<----Dictionaries----->>
+<<Declaration>>
+<<Non-instantiated>>
+x~ {}
+
+<<Instantiated>>
+x {a : 1, b : 2, c : 3}
+
+<<Value from key n>>
+x{n}
+
+<<Does key n exist?>>
+x{n}?
+
+<<-----------------Lambda Functions----------------->>
+lambda x -> x + 1
+
+<<-----------------Tuples----------------->>
+<<Declaration>>
+<<Non-Instantiated>>
+x~ ()
+
+<<Instantiated (Packing)>>
+x (a, b)
+
+<<Unpacking>>
+a, b : x
+
+<<Eg. >>
+x (1, 2)   <<x is equal to the tuple, (1, 2)>>
+a, b : x   <<a is equal to 1, b is equal to 2>>
+<<NOTE: This instantiates a 1, b 2>>
+
+<<-------------------------------------------------------------------->>
+<<--------------Example Program - Hello World Function---------------->>
+<<-------------------------------------------------------------------->>
+
+hello {print("hello world")}
+
+<<-------------------------------------------------------------------->>
+<<-----------------Example Program - Length of Lists------------------>>
+<<-------------------------------------------------------------------->>
+
+length acc : function {
+[]      -> acc,
+x :: xs -> length acc++ xs
+}
+
+<<Alternatively...>>
+
+length xs {
+  count 0
+  for i in xs {count++}
+}
+
+<<-------------------------------------------------------------------->>
+<<----------------------Example Program - Prime----------------------->>
+<<-------------------------------------------------------------------->>
+prime acc : function {
+n when n <= 2      -> false,
+n when n % 2 = 0   -> false,
+n when acc = n     -> true,
+n when n % acc = 0 -> false,
+n                  -> prime (acc+2) n
+}
+
+<<Alternatively...>>
+
+prime n {
+  if (n <= 2) or (n % 2 = 0) {false}
+  for i(i+2) 3:n {
+    if n % i = 0 {false}
+  }
+  true
+}
+
+<<-------------------------------------------------------------------->>
+<<--------------------Example Program - Quicksort--------------------->>
+<<-------------------------------------------------------------------->>
+
+partition p (ps, nps) : function {
+[]             -> (ps, nps),
+x::xs when p x -> partition p (x::ps, nps) xs,
+x::xs          -> partition p (ps, x::nps) xs,
+}
+
+quicksort : function {
+[]    -> [],
+x::xs ->
+	(lt, oth) partition (lambda y -> y < x) ([], []) xs
+	(quicksort lt) @ (x :: (quicksort oth))
+}
+
+<<-------------------------------------------------------------------->>
+<<---------Example Program - Sum the first n square numbers----------->>
+<<-------------------------------------------------------------------->>
+
+sum n {
+  xs x^2 1:(n+1) []
+  sum' acc : function {
+    []      -> acc
+    x :: xs -> sum' (acc+n) xs
+  }
+  sum' 0 xs
+}
+
+<<Alternatively...>>
+
+sum n {
+  list x^2 1:(n+1) []
+  count 0
+  for i n {
+    count + list[i]
+  }
+}

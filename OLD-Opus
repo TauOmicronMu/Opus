@@ -1,0 +1,151 @@
+------------------------------
+			  OPUS           |
+------------------------------
+
+Boolean Operators (same for bitwise)
+------------------
+~  = not
+&  = and
+|| = or
+xor  = xor 
+== = equality
+=  = identity
+
+Mathematical Operators
+----------------------
++ = addition
+- = subtraction
+* = multiplication
+/ = division
+^ = exponent
+% = mod
+== = equality
+
+Comments
+--------
+// = Single line comment
+(* *) = Block comment
+
+Variable Declaration
+--------------------
+let <type> <identifier> = <value>
+
+//non-instantiated
+let <type> <identifier>;
+
+Function Definition
+-------------------
+let <return type> <function name> <params> = {
+	<body>
+}
+
+// The return keyword isn't enforced, eg.
+let int add_one n = {n++}
+
+//Is the same as...
+let int add_one n = 
+	return n++;
+
+// Curly braces OR semicolons (or both), but not none.
+
+Iteration
+----------
+// Generic while loop
+while <condition> {
+	<body>
+}
+
+// do... while loop
+do { <body> } while <condition> 
+
+// for loop over given value
+for <iterator name> in <expression that returns an int> {
+	<body>
+}
+
+// for loop over an iterable
+for <iterator name> in <iterable> {
+	<body>
+}
+
+loop { <body> }
+
+Class Definition
+----------------
+class <identifier> extends <class> implements <interface> {
+	
+	// Attribute Declaration - Default scope is private.
+	let <scope - default = private> <type> <identifier> = <expression>
+	
+	// Constructor Declaration
+	let __init__(parameters) = {
+		<body>
+	}
+	
+	// Method Declaration
+	let <scope> <type> <identifier> = {
+		<body>
+	}
+}
+
+//NO LONGER USE this. .... USE self. ^-^
+
+Iterables
+---------
+//ArrayLists are now called "Lists" and will always be used. Arrays will no longer exist.
+
+let <identifier> = List<type>
+
+//Alternatively...
+
+let <identifier> = [<given list>] //Infer the type here
+ 
+//Eg.
+
+let x = [1;2;3;4] 
+
+//is the same as:
+
+let x = List<int>
+x = [1;2;3;4]
+
+List[i] = <value> //return the value at position i
+
+//Dictionaries
+
+let <identifier> = List<key type, value type>
+
+let <identifier> = {<given dictionary>}
+
+Dictionary{i} = <value> //returns the value stored at key, i
+
+Tuples
+------
+
+let x = (a, b) //packing a tuple
+
+let a, b = x //unpacking a tuple
+
+//Eg. 
+
+let x = (1, 2) 
+
+let a, b = x
+ 
+//does this:
+a = 1
+b = 2
+
+Tuple(i) = <value> //returns the value stored at the ith element.
+
+Lambda Functions
+----------------
+
+fun x -> <body>
+
+Printing
+--------
+print <value> //prints without newline
+println <value> //prints with newline
+
+
