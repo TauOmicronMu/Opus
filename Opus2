@@ -158,6 +158,18 @@ x[n]?
 <<Append xs to ys>>
 x @ y
 
+<<Cons>>
+[1,2,3] ==
+1 :: [2,3] ==
+1 :: 2 :: [3] ==
+1 :: 2 :: 3 :: []
+
+<<Populating lists using equations>>
+list x^2 10 []
+<< NOTE : This is <identifier> <equation> <number of elements> [] >>
+<<and returns... [1, 4, 9, 16, ...100]>>
+
+
 <<----Dictionaries----->>
 <<Declaration>>
 <<Non-instantiated>>
@@ -248,4 +260,27 @@ quicksort : function {
 x::xs ->
 	(lt, oth) partition (lambda y -> y < x) ([], []) xs
 	(quicksort lt) @ (x :: (quicksort oth))
+}
+
+<<-------------------------------------------------------------------->>
+<<---------Example Program - Sum the first n square numbers----------->>
+<<-------------------------------------------------------------------->>
+
+sum n {
+  xs x^2 n []
+  sum' acc : function {
+    []      -> acc
+    x :: xs -> sum' (acc+n) xs
+  }
+  sum' 0 xs
+}
+
+<<Alternatively...>>
+
+sum n {
+  list x^2 n []
+  count 0
+  for i n {
+    count + list[i]
+  }
 }
