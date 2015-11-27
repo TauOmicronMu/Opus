@@ -1,0 +1,114 @@
+<<----------------------------------OPUS---------------------------------->>
+<<-------------------------Opus code on the LHS--------------------------->>
+<<------------------------Java equiv. on the RHS-------------------------->>
+<<------------------------------------------------------------------------>>
+
+<<Comment>>
+
+<<Comment over
+multiple lines>>
+
+<<-----------------Variable Declaration----------------->>
+<<Non-Instantiated>>
+x~                                                                      (int x;)
+
+<<Instantiated>>
+x 1                                                                 (int x = 1;)
+
+<<-----------------Function definition----------------->>
+<<With no parameters>>
+f {do something}                               (public void f() {do something;})
+
+<<With one parameter>>
+f x {x++}                                    (public int f(int x) {return x++;})
+
+<<With multiple parameters>>
+f x y {x + y}                       (public int f(int x, int y) {return x + y;})
+
+<<-----------------Conditionals----------------->>
+<<If, elif, else>>
+if b    {do this}
+elif b' {do this}
+else    {do this}
+
+<<NOTE : These can be split up however, eg. just:
+                if b {do this}
+         Or:
+                if b   {do this}
+                elif c {do this}
+        Or:
+                if b {do this}
+                else {do this}
+<<-----------------Iteration----------------->>
+<<While Loops>>
+while b {do this}                                           (while(b) {do this})
+
+<<For Loops>>
+<<Only define the end point for i>>
+for i 5 {do this}                         (for(int i = 0; i < 5; i++) {do this})
+
+<<Define both the start and end points for i>>
+for i 2:5 {do this}                       (for(int i = 2; i < 5; i++) {do this})
+
+<<Iterate over an iterable>>
+for i in iterable {do this}              (for(String s : stringArray) {do this})
+
+<<-----------------Pattern Matching----------------->>
+<<Single Match>>
+f xs : match xs with                                 (Java doesn't have this :()
+| []      -> do something
+| x :: xs -> do something else
+
+<<Multiple Matches>>
+f xs ys : match xs, ys with
+| [], []           -> do something
+| x :: xs, y :: ys -> do something else
+
+<<Function 'shortcut'>>
+f : function
+| []      -> do something
+| x :: xs -> do something else
+
+<<-----------------Iterables----------------->>
+<<-----Lists----->>
+<<NOTE : Lists are immutable in Opus>>
+<<NOTE : Lists are 'dynamic' in size (not technically, but for all intents
+and purposes they will act as if they are)>>
+
+<<Declaration>>
+<<Non-instantiated>>
+[x]~
+
+<<Instantiated>>
+x [1, 2, 3, 4, 5]
+
+<<Element at position n>>
+x[n]
+
+<<Elements up to position n>>
+x[:n]
+
+<<Elements from position n upwards>>
+x[n:]
+
+<<Elements between (and including) positions m and n>>
+x[n:m]
+
+<<Does the list contain element n?>>
+x[n]?
+
+<<----Dictionaries----->>
+<<Declaration>>
+<<Non-instantiated>>
+{x}~
+
+<<Instantiated>>
+x {a : 1, b : 2, c : 3}
+
+<<Value from key n>>
+x{n}
+
+<<Does key n exist?>>
+x{n}?
+
+<-------------------------------------------------------------------->>
