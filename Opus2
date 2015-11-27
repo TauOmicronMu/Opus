@@ -82,10 +82,11 @@ else    {do this}
 
 <<When>>
 <<<NOTE: DURING PATTERN MATCHING ONLY>>
-f xs : match xs with                                 (Java doesn't have this :()
-| []                 -> do something
-| x :: xs when x = 2 -> do something else
-| x :: xs            -> do something else
+f xs : match xs with {
+[]                 -> do something,
+x :: xs when x = 2 -> do something else,
+x :: xs            -> do something else
+}
 
 <<-----------------Iteration----------------->>
 <<While Loops>>
@@ -105,21 +106,26 @@ for i(i+2) n {do this}                  (for (int i = 2; i < n; i+=2) {do this})
 <<Iterate over an iterable>>
 for i in iterable {do this}              (for(String s : stringArray) {do this})
 
-<<-----------------Pattern Matching----------------->>
+<<-----------------Pattern Matching----------------->>  (Java doesn't have this :()
 <<Single Match>>
-f xs : match xs with                                 (Java doesn't have this :()
-| []      -> do something
-| x :: xs -> do something else
+f xs : match xs with {
+[] -> do something,
+x :: xs -> do something else
+}
 
 <<Multiple Matches>>
-f xs ys : match xs, ys with
-| [], []           -> do something
-| x :: xs, y :: ys -> do something else
+f xs ys : match xs, ys with {
+[], []             -> do something,
+x :: xs, y :: ys   -> do something else
+}
 
 <<Function 'shortcut'>>
-f : function
-| []      -> do something
-| x :: xs -> do something else
+f : function {
+[]        -> do something,
+x :: xs   -> do something else
+}
+
+
 
 <<-----------------Iterables----------------->>
 <<-----Lists----->>
@@ -194,9 +200,10 @@ hello {print "hello world"}
 <<-----------------Example Program - Length of Lists------------------>>
 <<-------------------------------------------------------------------->>
 
-length acc : function
-| [] -> acc
-| x :: xs -> length acc++ xs
+length acc : function {
+[]      -> acc,
+x :: xs -> length acc++ xs
+}
 
 <<Alternatively...>>
 
@@ -208,18 +215,13 @@ length xs {
 <<-------------------------------------------------------------------->>
 <<----------------------Example Program - Prime----------------------->>
 <<-------------------------------------------------------------------->>
-
-prime acc : function
-      <<Less than 2>>
-| n when n <= 2                 -> false
-      <<Divisible by 2>>
-| n when n % 2 = 0              -> false
-      <<Divisible by nothing but itself - yay ^-^>
-| n when acc = n                -> true
-      <<acc < n and n % acc = 0>>
-| n when n % acc = 0            -> false
-      <<acc < n and not (n % acc = 0)>
-| n                             -> prime (acc+2) n
+prime acc : function {
+n when n <= 2      -> false,
+n when n % 2 = 0   -> false,
+n when acc = n     -> true,
+n when n % acc = 0 -> false,
+n                  -> prime (acc+2) n
+}
 
 <<Alternatively...>>
 
@@ -235,13 +237,15 @@ prime n {
 <<--------------------Example Program - Quicksort--------------------->>
 <<-------------------------------------------------------------------->>
 
-partition p (ps, nps) : function
-| []             -> (ps, nps)
-| x::xs when p x -> partition p (x::ps, nps) xs
-| x::xs          -> partition p (ps, x::nps) xs
+partition p (ps, nps) : function {
+[]             -> (ps, nps),
+x::xs when p x -> partition p (x::ps, nps) xs,
+x::xs          -> partition p (ps, x::nps) xs,
+}
 
-quicksort : function
-| []    -> []
-| x::xs ->
+quicksort : function {
+[]    -> [],
+x::xs ->
 	(lt, oth) partition (lambda y -> y < x) ([], []) xs
 	(quicksort lt) @ (x :: (quicksort oth))
+}
