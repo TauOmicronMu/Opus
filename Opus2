@@ -3,10 +3,50 @@
 <<------------------------Java equiv. on the RHS-------------------------->>
 <<------------------------------------------------------------------------>>
 
+<<-----------------Comments----------------->>
 <<Comment>>
 
 <<Comment over
 multiple lines>>
+
+
+<<-----------------Print----------------->>
+print "hello world"
+println "hello world"
+
+<<-----------------Booleans----------------->>
+true = true
+false = false
+
+<<-----------------Operators----------------->>
+<<-----Boolean----->
+and = and
+or = or
+xor = xor
+not = not
+=   = equality or identity
+
+<<-----Mathematical----->>
++   = addition
+-   = subtraction
+*   = multiplication
+/   = division
+//  = integer division
+^   = exponentiation
+%   = modulus
+|n| = absolute value of n
+>   = greater than
+<   = less than
+>=  = greater than or equal to
+<=  = less than or equal to
+
+<<-----Bitwise----->>
+¬   = not
+&   = and
+<<NOTE : || is or because or includes and and or, and xor only contains or, so
+xor is just | (represents less)>>
+||  = or
+|   = xor
 
 <<-----------------Variable Declaration----------------->>
 <<Non-Instantiated>>
@@ -39,6 +79,14 @@ else    {do this}
         Or:
                 if b {do this}
                 else {do this}
+
+<<When>>
+<<<NOTE: DURING PATTERN MATCHING ONLY>>
+f xs : match xs with                                 (Java doesn't have this :()
+| []                 -> do something
+| x :: xs when x = 2 -> do something else
+| x :: xs            -> do something else
+
 <<-----------------Iteration----------------->>
 <<While Loops>>
 while b {do this}                                           (while(b) {do this})
@@ -49,6 +97,10 @@ for i 5 {do this}                         (for(int i = 0; i < 5; i++) {do this})
 
 <<Define both the start and end points for i>>
 for i 2:5 {do this}                       (for(int i = 2; i < 5; i++) {do this})
+
+<<Define a specific method for changing i.
+NOTE : The default is i++>>
+for i(i+2) n {do this}                  (for (int i = 2; i < n; i+=2) {do this})
 
 <<Iterate over an iterable>>
 for i in iterable {do this}              (for(String s : stringArray) {do this})
@@ -97,6 +149,9 @@ x[n:m]
 <<Does the list contain element n?>>
 x[n]?
 
+<<Append xs to ys>>
+x @ y
+
 <<----Dictionaries----->>
 <<Declaration>>
 <<Non-instantiated>>
@@ -111,4 +166,82 @@ x{n}
 <<Does key n exist?>>
 x{n}?
 
-<-------------------------------------------------------------------->>
+<<-----------------Lambda Functions----------------->>
+lambda x -> x + 1
+
+<<-----------------Tuples----------------->>
+<<Declaration>>
+<<Non-Instantiated>>
+x ()
+
+<<Instantiated (Packing)>>
+x (a, b)
+
+<<Unpacking>>
+(a, b) x
+
+<<Eg. >>
+x (1, 2) <<x is equal to the tuple, (1, 2)>>
+(a, b) x <<a is equal to 1, b is equal to 2>>
+
+<<-------------------------------------------------------------------->>
+<<--------------Example Program - Hello World Function---------------->>
+<<-------------------------------------------------------------------->>
+
+hello {print "hello world"}
+
+<<-------------------------------------------------------------------->>
+<<-----------------Example Program - Length of Lists------------------>>
+<<-------------------------------------------------------------------->>
+
+length acc : function
+| [] -> acc
+| x :: xs -> length acc++ xs
+
+<<Alternatively...>>
+
+length xs {
+  count 0
+  for i in xs {count++}
+}
+
+<<-------------------------------------------------------------------->>
+<<----------------------Example Program - Prime----------------------->>
+<<-------------------------------------------------------------------->>
+
+prime acc : function
+      <<Less than 2>>
+| n when n <= 2                 -> false
+      <<Divisible by 2>>
+| n when n % 2 = 0              -> false
+      <<Divisible by nothing but itself - yay ^-^>
+| n when acc = n                -> true
+      <<acc < n and n % acc = 0>>
+| n when n % acc = 0            -> false
+      <<acc < n and not (n % acc = 0)>
+| n                             -> prime (acc+2) n
+
+<<Alternatively...>>
+
+prime n {
+  if (n <= 2) or (n % 2 = 0) {false}
+  for i(i+2) 3:n {
+    if n % i = 0 {false}
+  }
+  true
+}
+
+<<-------------------------------------------------------------------->>
+<<--------------------Example Program - Quicksort--------------------->>
+<<-------------------------------------------------------------------->>
+
+partition p (ps, nps) : function
+| []             -> (ps, nps)
+| x::xs when p x -> partition p (x::ps, nps) xs
+| x::xs          -> partition p (ps, x::nps) xs
+
+quicksort : function
+| []    -> []
+| x::xs ->
+	(lt, oth) partition (lambda y -> y < x) ([], []) xs
+	(quicksort lt) @ (x :: (quicksort oth))
