@@ -3,16 +3,21 @@
 <<------------------------Java equiv. on the RHS-------------------------->>
 <<------------------------------------------------------------------------>>
 
+>> Statically typed
+>> Type Inference on both Variables & Functions
+>> Strongly typed
+>> Functional & Imperative
+>> Interpreted
+
 <<-----------------Comments----------------->>
-<<Comment>>
+>> Comment
 
 <<Comment over
 multiple lines>>
 
-
 <<-----------------Print----------------->>
-print "hello world"
-println "hello world"
+print("hello world")
+println("hello world")
 
 <<-----------------Booleans----------------->>
 true = true
@@ -24,7 +29,8 @@ and = and
 or = or
 xor = xor
 not = not
-=   = equality or identity
+=   = equality
+is  = identity
 
 <<-----Mathematical----->>
 +   = addition
@@ -40,14 +46,28 @@ not = not
 >=  = greater than or equal to
 <=  = less than or equal to
 
-<<-----Bitwise----->>
-¬   = not
-&   = and
-<<NOTE : || is or because or includes and and or, and xor only contains or, so
-xor is just | (represents less)>>
-||  = or
-|   = xor
+++x = Prefix incrementation
+--x = Prefix decrementation
+x++ = Postfix incrementation
+x-- = Postfix decrementation
 
+x += y  = (x = x + y)
+x -= y  = (x = x - y)
+x *= y  = (x = x * y)
+x /= y  = (x = x / y)
+x //= y = (x = x // y)
+x ^= y  = (x = x ^ y)
+x %= y  = (x = x % y)
+
+<<-----Bitwise----->>
+¬    = not
+&    = and
+|    = or
+bxor = xor
+
+<<-----Other Operators----->>
+<<Applying a method to a variable : .= >>
+x = x.f() = (x .= f())
 <<-----------------Variable Declaration----------------->>
 <<Non-Instantiated>>
 x~                                                                      (int x;)
@@ -64,6 +84,14 @@ f x {x++}                                    (public int f(int x) {return x++;})
 
 <<With multiple parameters>>
 f x y {x + y}                       (public int f(int x, int y) {return x + y;})
+
+<<NOTE : A variable is seen to be void if there is no tangible value that can
+be returned. For example :
+
+  f x {print("hello " + x)}
+
+  is void, as there is nothing to return - it just prints "hello <x>".
+  This allows you to have void functions that take parameters. >>
 
 <<-----------------Conditionals----------------->>
 <<If, elif, else>>
@@ -83,14 +111,17 @@ else    {do this}
 <<When>>
 <<<NOTE: DURING PATTERN MATCHING ONLY>>
 f xs : match xs with {
-[]                 -> do something,
-x :: xs when x = 2 -> do something else,
-x :: xs            -> do something else
+  []                 -> do something,
+  x :: xs when x = 2 -> do something else,
+  x :: xs            -> do something else
 }
 
 <<-----------------Iteration----------------->>
 <<While Loops>>
 while b {do this}                                           (while(b) {do this})
+
+<<Do While Loops>>
+do {something} while b
 
 <<For Loops>>
 <<Only define the end point for i>>
@@ -109,33 +140,33 @@ for i in iterable {do this}              (for(String s : stringArray) {do this})
 <<-----------------Pattern Matching----------------->>  (Java doesn't have this :()
 <<Single Match>>
 f xs : match xs with {
-[] -> do something,
-x :: xs -> do something else
+  [] -> do something,
+  x :: xs -> do something else
 }
 
 <<Multiple Matches>>
 f xs ys : match xs, ys with {
-[], []             -> do something,
-x :: xs, y :: ys   -> do something else
+  [], []             -> do something,
+  x :: xs, y :: ys   -> do something else
 }
 
 <<Function 'shortcut'>>
 f : function {
-[]        -> do something,
-x :: xs   -> do something else
+  []        -> do something,
+  x :: xs   -> do something else
 }
 
 
 
 <<-----------------Iterables----------------->>
 <<-----Lists----->>
-<<NOTE : Lists are immutable in Opus>>
+<<NOTE : Lists are mutable in Opus>>
 <<NOTE : Lists are 'dynamic' in size (not technically, but for all intents
 and purposes they will act as if they are)>>
 
 <<Declaration>>
 <<Non-instantiated>>
-[x]~
+x~ []
 
 <<Instantiated>>
 x [1, 2, 3, 4, 5]
@@ -143,14 +174,14 @@ x [1, 2, 3, 4, 5]
 <<Element at position n>>
 x[n]
 
-<<Elements up to position n>>
+<<Elements up to (but not including) position n>>
 x[:n]
 
 <<Elements from position n upwards>>
 x[n:]
 
-<<Elements between (and including) positions m and n>>
-x[n:m]
+<<Elements between positions m and n-1>>
+x[m:n]
 
 <<Does the list contain element n?>>
 x[n]?
@@ -165,7 +196,7 @@ x @ y
 1 :: 2 :: 3 :: []
 
 <<Populating lists using equations>>
-list x^2 10 []
+list x^2 1:11 []
 << NOTE : This is <identifier> <equation> <number of elements> [] >>
 <<and returns... [1, 4, 9, 16, ...100]>>
 
@@ -173,7 +204,7 @@ list x^2 10 []
 <<----Dictionaries----->>
 <<Declaration>>
 <<Non-instantiated>>
-{x}~
+x~ {}
 
 <<Instantiated>>
 x {a : 1, b : 2, c : 3}
@@ -190,23 +221,24 @@ lambda x -> x + 1
 <<-----------------Tuples----------------->>
 <<Declaration>>
 <<Non-Instantiated>>
-x ()
+x~ ()
 
 <<Instantiated (Packing)>>
 x (a, b)
 
 <<Unpacking>>
-(a, b) x
+a, b : x
 
 <<Eg. >>
-x (1, 2) <<x is equal to the tuple, (1, 2)>>
-(a, b) x <<a is equal to 1, b is equal to 2>>
+x (1, 2)   <<x is equal to the tuple, (1, 2)>>
+a, b : x   <<a is equal to 1, b is equal to 2>>
+<<NOTE: This instantiates a 1, b 2>>
 
 <<-------------------------------------------------------------------->>
 <<--------------Example Program - Hello World Function---------------->>
 <<-------------------------------------------------------------------->>
 
-hello {print "hello world"}
+hello {print("hello world")}
 
 <<-------------------------------------------------------------------->>
 <<-----------------Example Program - Length of Lists------------------>>
@@ -267,7 +299,7 @@ x::xs ->
 <<-------------------------------------------------------------------->>
 
 sum n {
-  xs x^2 n []
+  xs x^2 1:(n+1) []
   sum' acc : function {
     []      -> acc
     x :: xs -> sum' (acc+n) xs
@@ -278,7 +310,7 @@ sum n {
 <<Alternatively...>>
 
 sum n {
-  list x^2 n []
+  list x^2 1:(n+1) []
   count 0
   for i n {
     count + list[i]
