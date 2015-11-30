@@ -132,7 +132,7 @@ for i 2:5 {do this}                       (for(int i = 2; i < 5; i++) {do this})
 
 <<Define a specific method for changing i.
 NOTE : The default is i++>>
-for i(i+2) n {do this}                  (for (int i = 2; i < n; i+=2) {do this})
+for i(i+2) n {do this}                  (for (int i = 0; i < n; i+=2) {do this})
 
 <<Iterate over an iterable>>
 for i in iterable {do this}              (for(String s : stringArray) {do this})
